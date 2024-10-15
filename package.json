@@ -1,0 +1,53 @@
+{
+   "name": "sveltycms-marketplace",
+   "version": "0.0.1",
+   "private": true,
+   "scripts": {
+      "dev": "vite dev",
+      "build": "vite build",
+      "preview": "vite preview",
+      "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+      "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+      "lint": "prettier --check . && eslint .",
+      "format": "prettier --write .",
+      "migrate": "npx knex --knexfile ./knexfile.ts migrate:latest -r ts-node/register",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs",
+      "migration": " npm run typeorm migration:run -- -d ./src/data-source.ts"
+   },
+   "devDependencies": {
+      "@sveltejs/adapter-auto": "^3.0.0",
+      "@sveltejs/kit": "^2.0.0",
+      "@sveltejs/vite-plugin-svelte": "^3.0.0",
+      "@types/eslint": "^9.6.0",
+      "@types/knex": "^0.15.2",
+      "@types/node": "^16.11.10",
+      "autoprefixer": "^10.4.20",
+      "eslint": "^9.0.0",
+      "eslint-config-prettier": "^9.1.0",
+      "eslint-plugin-svelte": "^2.36.0",
+      "globals": "^15.0.0",
+      "postcss": "^8.4.47",
+      "prettier": "^3.1.1",
+      "prettier-plugin-svelte": "^3.1.2",
+      "svelte": "^4.2.7",
+      "svelte-check": "^4.0.0",
+      "tailwindcss": "^3.4.14",
+      "ts-node": "10.9.1",
+      "typeorm-ts-node-commonjs": "^0.3.20",
+      "typescript": "4.5.2",
+      "typescript-eslint": "^8.0.0",
+      "vite": "^5.0.3"
+   },
+   "type": "module",
+   "dependencies": {
+      "@skeletonlabs/tw-plugin": "^0.4.0",
+      "axios": "^1.7.7",
+      "knex": "^3.1.0",
+      "mariadb": "^3.3.2",
+      "mysql": "^2.14.1",
+      "reflect-metadata": "^0.1.13",
+      "sveltycms-marketplace": "file:",
+      "typeorm": "0.3.20"
+   }
+}
