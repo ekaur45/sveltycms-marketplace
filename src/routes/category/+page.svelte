@@ -22,15 +22,14 @@
 </script>
 
 <form on:submit={handleOnAddSubmit}>
-    <input type="text" bind:value={name}>
-    <button>Submit</button>
+    <input type="text" bind:value={name} class="mp-input">
+    <button class="btn-default">Submit</button>
 </form>
-<div>
-    <ul>
+<div class="w-full">
+    <ul class="flex flex-col w-full">
         {#each categories as category}
             <li>{category.name}
-
-                <button on:click={deleteCategory(category.categoryId)}>Delete</button>
+                <button class="border border-gray p-2 rounded" on:click={deleteCategory(category.categoryId)}>Delete</button>
             </li>
         {/each}
     </ul>
