@@ -1,8 +1,7 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect, ServerLoad } from '@sveltejs/kit';
 
-export async function load (obj:any){
-
-  return {
-    user: obj.locals.user
+export const load:ServerLoad = async ({locals})=>{
+    return {
+    user: locals.user
   };
-};
+}

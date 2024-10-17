@@ -1,25 +1,20 @@
-import { RequestHandler } from "@sveltejs/kit";
+import { json, RequestHandler } from "@sveltejs/kit";
 import { AppDataSource } from "../../../data-source";
 import { Category } from "../../../entity/Category";
+import { error } from "console";
 
 export const GET: RequestHandler = async () => {
     const categoryRepo = AppDataSource.getRepository(Category);
     let categories = await categoryRepo.find({});
-
-    //const products = await query<Product>('SELECT * FROM Products');
-    return new Response(JSON.stringify([...categories]), {
-        status: 200, headers: {
-            "content-type": "application/json"
-        }
-    });
+    return json(categories);
 };
 
 export const POST: RequestHandler = async ({ request }) => {
     const { name } = await request.json();
-    if (!name) new Response("", { status: 400 });
+    if (!name) error(400,"Invalid request");
 
 
     await AppDataSource.manager.save(Category, { name });
 
-    return new Response("", { status: 201 });
+    return json("Category added.");
 };

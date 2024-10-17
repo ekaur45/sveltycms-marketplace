@@ -14,3 +14,4 @@ tmp/
 temp/
 .sveltekit/
 .env
+saved-files/**

@@ -29,16 +29,22 @@
             </button>
           </div>
           <div class="hidden lg:flex lg:gap-x-12">
-            <!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a> -->
+            {#if user}
+            {#if user.role =='admin'}
+            <a href="/category" class="text-sm font-semibold leading-6 text-gray-900 me-3">Add category</a>
+            {/if}
+            <a href="/products/add" class="text-sm font-semibold leading-6 text-gray-900 me-3">Add Product</a>
+            <a href="/products/mine" class="text-sm font-semibold leading-6 text-gray-900 me-3">My Product</a>
+             {/if}
           </div>
           {#if user}
             <!-- <button>Upload</button>
             <button on:click={handleLogoutClick}>Logout</button>
             <img src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="" class="h-10 w-10 shadow flex-none rounded-full"> -->
-            <div>
+            <div class="flex gap-2">
                 <span>{user?.name}</span> | 
             <div class="lg:flex lg:flex-1 lg:justify-end">
-                <a href="/account/login" class="text-sm font-semibold leading-6 text-gray-900">Log out <span aria-hidden="true">&rarr;</span></a>
+                <a href="/account/login" on:click={handleLogoutClick} class="text-sm font-semibold leading-6 text-gray-900">Log out <span aria-hidden="true">&rarr;</span></a>
               </div>
             </div>
         {:else}

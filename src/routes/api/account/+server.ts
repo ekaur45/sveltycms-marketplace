@@ -1,4 +1,4 @@
-import { RequestHandler } from "@sveltejs/kit";
+import { json, RequestHandler } from "@sveltejs/kit";
 import { AppDataSource } from "../../../data-source";
 import { User } from "../../../entity/User";
 
@@ -6,7 +6,6 @@ export const GET: RequestHandler = async()=>{
 
 }
 export const POST: RequestHandler = async({request,cookies})=>{
-    debugger
     const body = await request.json();
     const {name,email,password} = body;
     const userRepo = await AppDataSource.getRepository(User);
@@ -22,5 +21,5 @@ export const POST: RequestHandler = async({request,cookies})=>{
         httpOnly:true,
         secure:process.env.NODE_ENV === 'production'
     });
-    return new Response("",{status:200});
+    return json("Login success.");
 }

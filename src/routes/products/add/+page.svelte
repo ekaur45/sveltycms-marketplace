@@ -8,14 +8,14 @@
   const categories = $page.data.categories;
   // Form data state
   let product = {
-    id: null,
     userId: null,
     title: '',
     description: '',
     price: 0,
     categoryId: null,
-    stock: 0,
+    summary: '',
     imageUrl: '',
+    file:null
   };
 
   // Function to handle form submission
@@ -23,13 +23,17 @@
     event.preventDefault();
 
     try {
+      const formData = new FormData();
+      Object.keys(product).forEach(key => {        
+        formData.append(key, product[key]);
+      });
       // Send the form data to the backend (update or create)
       const response = await fetch('/api/products', {
-        method: product.id ? 'PUT' : 'POST',
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          
         },
-        body: JSON.stringify(product),
+        body: formData,
       });
 
       if (response.ok) {
@@ -42,7 +46,10 @@
       console.error('Error submitting form:', error);
     }
   }
-
+const   handleFileChange = e=>{
+  
+    product.file = e.target.files[0];
+  }
 </script>
 <div class="card">
   <form on:submit={handleSubmit} class="product-form">
@@ -75,7 +82,7 @@
         class="mp-input"
         bind:value={product.price}
         step="0.01"
-        required
+        placeholder="Leave empty if the product is free"
       />
     </div>
   
@@ -96,12 +103,12 @@
     </div>
   
     <div>
-      <label for="stock">Stock</label>
+      <label for="summary">Summary</label>
       <input
-        type="number"
-        id="stock"
+        type="text"
+        id="summary"
         class="mp-input"
-        bind:value={product.stock}
+        bind:value={product.summary}
         required
       />
     </div>
@@ -113,7 +120,17 @@
         id="imageUrl"
         class="mp-input"
         bind:value={product.imageUrl}
-        required
+        
+      />
+    </div>
+    <div>
+      <label for="file">File</label>
+      <input
+        type="file"
+        id="file"
+        class="mp-input"
+        on:change={handleFileChange}
+        
       />
     </div>
   
