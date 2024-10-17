@@ -15,7 +15,8 @@
     categoryId: null,
     summary: '',
     imageUrl: '',
-    file:null
+    file:null,
+    featuredImage:null
   };
 
   // Function to handle form submission
@@ -46,25 +47,28 @@
       console.error('Error submitting form:', error);
     }
   }
-const   handleFileChange = e=>{
-  
+  const handleFileChange = e=>{  
     product.file = e.target.files[0];
   }
+  const handleOnFeatureImageChange = e=>{  
+    product.featuredImage = e.target.files[0];
+  }
 </script>
-<div class="card">
+<div class="bg-white p-6 shadow w-full mt-3">
+  <h4 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900s">Add new product</h4>
   <form on:submit={handleSubmit} class="product-form">
-    <div>
+    <div class="mb-3">
       <label for="title">Title</label>
       <input
         type="text"
         id="title"
-        class="mp-input"
+        class="mp-input mt-3"
         bind:value={product.title}
         required
       />
     </div>
   
-    <div>
+    <div class="mb-3">
       <label for="description">Description</label>
       <textarea
         id="description"
@@ -74,8 +78,8 @@ const   handleFileChange = e=>{
       />
     </div>
   
-    <div>
-      <label for="price">Price</label>
+    <div class="mb-3">
+      <label for="price">Price <span style="font-size: 12px;" class="text-gray-400">(Leave empty if the product is free)</span></label>
       <input
         type="number"
         id="price"
@@ -86,8 +90,8 @@ const   handleFileChange = e=>{
       />
     </div>
   
-    <div>
-      <label for="categoryId">Category ID</label>
+    <div class="mb-3">
+      <label for="categoryId">Category</label>
       <select bind:value={product.categoryId}
       class="mp-input">
         {#each categories as category}        
@@ -102,7 +106,7 @@ const   handleFileChange = e=>{
       /> -->
     </div>
   
-    <div>
+    <div class="mb-3">
       <label for="summary">Summary</label>
       <input
         type="text"
@@ -113,17 +117,21 @@ const   handleFileChange = e=>{
       />
     </div>
   
-    <div>
-      <label for="imageUrl">Image URL</label>
-      <input
+    <div class="mb-3">
+      <label for="imageUrl">Featured Image</label>
+      <!-- <input
         type="text"
         id="imageUrl"
         class="mp-input"
         bind:value={product.imageUrl}
         
-      />
+      /> -->
+      <label for="featuredImage" class="mp-input">
+        {product.featuredImage?.name ??"Select featured image"}
+        <input type="file" style="display: none;" on:change={handleOnFeatureImageChange}  accept="image/png, image/gif, image/jpeg" name="featuredImage" id="featuredImage" class="mp-input">
+      </label>
     </div>
-    <div>
+    <div class="mb-3">
       <label for="file">File</label>
       <input
         type="file"
@@ -134,6 +142,6 @@ const   handleFileChange = e=>{
       />
     </div>
   
-    <button type="submit" class="btn-default">Save Product</button>
+    <button type="submit" class="btn-primary mb-3">Save Product</button>
   </form>
 </div>

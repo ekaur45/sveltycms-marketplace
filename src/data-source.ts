@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "test123",
+    password: "",
     database: "sveltycsm-marketplace",
     synchronize: false,
     logging: true,

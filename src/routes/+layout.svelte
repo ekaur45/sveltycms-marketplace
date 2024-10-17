@@ -12,7 +12,7 @@
 </script>
 <div class="container mx-auto max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
     {#if $page.url.pathname!=='/account/login' && $page.url.pathname!=='/account/create'}    
-    <header class="bg-white">
+    <header class="bg-whit shadow bg-black bg-opacity-10">
         <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div class="flex lg:flex-1">
             <a href="/" class="-m-1.5 p-1.5">
@@ -75,7 +75,7 @@
               <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
                 
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
+                  <a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
                 </div>
                 <div class="py-6">
                   <a href="/account/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
@@ -84,9 +84,7 @@
             </div>
           </div>
         </div>
-      </header>
-    
-        
+    </header>
     {/if}
     <slot/>
 </div>

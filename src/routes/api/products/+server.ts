@@ -23,7 +23,8 @@ export const POST: RequestHandler = async ({ request,cookies }) => {
     return error(302,"/account/login")
   }
   const formData = await request.formData();
-  const file = formData.get('file');
+  const file = formData.get('file') as File;
+  const image = formData.get('featuredImage') as File;
   if (!file) {
     return error(400,"No file attached.");
   }
@@ -32,9 +33,13 @@ export const POST: RequestHandler = async ({ request,cookies }) => {
   // For example, if you wanted to read its contents:
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
+  const imageArrayBuffer = await image.arrayBuffer();
+  const imageBuffer = Buffer.from(imageArrayBuffer);
 
   const fileName = (+ new Date())+file.name;
+  const imageFileName = (+ new Date())+image.name;
   writeFileSync(`./saved-files/${fileName}`, buffer);
+  writeFileSync(`./saved-files/${imageFileName}`, imageBuffer);
   // const { title, description, price, categoryId, stock, imageUrl,summary} = await request.json();
   const title = formData.get('title');
   const description = formData.get('description');
@@ -45,7 +50,7 @@ export const POST: RequestHandler = async ({ request,cookies }) => {
 
   if(!(title&&description&&categoryId&&userId)) error(400,"Invalid request");
 
-  await productService.addProduct({title,description,price,categoryId,userId,summary,fileUrl:fileName});
+  await productService.addProduct({title,description,price,categoryId,userId,summary,imageUrl:imageFileName,fileUrl:fileName});
 
   return json("Product added.");
 };

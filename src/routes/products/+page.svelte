@@ -23,16 +23,23 @@
     <div class="products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-3">
       <input type="search" placeholder="Search" class="mp-input">
       <select class="mp-input">
-
+        <option value="theme">Theme</option>
+        <option value="plugin">Plugin</option>
       </select>
-      <select class="mp-input"></select>
+      <select class="mp-input">
+        <option value="free">Free</option>
+        <option value="paid">Paid</option>
+      </select>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {#if !products || products.length ===0}
+        <p>No data</p>
+      {/if}
       {#each products as product}
           <a href={`/products/${product.id}`}>
-            <div class="shadow-lg">
+            <div class="shadow-lg bg-white">
               {#if product.imageUrl}
-              <img src="{product.imageUrl}" alt="">
+              <img src="{'/file/'+product.imageUrl}" alt="">
                 {:else}
                 <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" alt="">
               {/if}
