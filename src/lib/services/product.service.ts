@@ -33,7 +33,7 @@ class ProductService{
     }
 
     async getProductById(id:number){
-        const product = await this.productRepo.findOne({where:{id}});
+        const product = await this.productRepo.findOne({where:{id},relations:['category']});
         return product;
     }
 

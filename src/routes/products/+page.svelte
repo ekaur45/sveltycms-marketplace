@@ -9,7 +9,7 @@
     });
   </script>
   
-    <div class="shadow-md p-4 mb-4 bg-white-300 mt-3">
+    <div class="shadow-md p-4 mb-4 bg-white mt-3">
       <h4>Submit Your Package</h4>
       <p class="mb-3">Are you passionate about improving content management? Join us in enhancing SveltyCMS! Utilize our powerful REST API and comprehensive documentation to create your own extensions and features. Together, we can transform SveltyCMS into the leading platform for all your content management needs</p>
       <button on:click={()=>{goto('/products/add')}} class="btn-default">Create package</button>
